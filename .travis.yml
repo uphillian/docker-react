@@ -8,3 +8,16 @@ before_install:
 
 script:
   - docker run -e CI=true uphillian/docker-react npm run test
+
+
+deploy:
+  provider: elasticbeanstalk
+  region: "use-west-2"
+  app: "docker"
+  env: "Docker-env"
+  bucket_name: "elasticbeanstalk-us-west-2-896380160423"
+  bucket_path: "docker"
+  on:
+    branch: main
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: "$AWS_SECRET_KEY"
